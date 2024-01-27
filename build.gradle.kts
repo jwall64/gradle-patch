@@ -17,6 +17,14 @@ repositories {
 dependencies {
     implementation("com.github.jwall64.MidnightConfig:api:2.0.0-SNAPSHOT")
     implementation("com.github.jwall64.MidnightConfig:codec-json:2.0.0-SNAPSHOT")
+
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
+}
+
+tasks.test {
+    useJUnitPlatform()
+    workingDir(file("run/test"))
 }
 
 gradlePlugin {
