@@ -6,7 +6,6 @@ import dev.jwall64.gradle.patch.PatchEntry;
 import dev.jwall64.gradle.patch.PatchFile;
 import dev.jwall64.mdcfg.codec.JSONCodec;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
-import dev.jwall64.mdcfg.serializer.SerializeContext;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
