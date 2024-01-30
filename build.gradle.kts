@@ -15,8 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.jwall64.MidnightConfig:api:2.0.0-SNAPSHOT")
-    implementation("com.github.jwall64.MidnightConfig:codec-json:2.0.0-SNAPSHOT")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)
