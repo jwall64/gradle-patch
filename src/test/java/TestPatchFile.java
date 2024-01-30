@@ -1,14 +1,14 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import dev.jwall64.gradle.patch.LineSupplier;
 import dev.jwall64.gradle.patch.LoadedFile;
 import dev.jwall64.gradle.patch.PatchEntry;
 import dev.jwall64.gradle.patch.PatchFile;
-import dev.jwall64.mdcfg.codec.JSONCodec;
-import dev.jwall64.mdcfg.serializer.ConfigContext;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class TestPatchFile {
@@ -48,9 +48,11 @@ public class TestPatchFile {
         File toPatch = new File("SpigotPlayer.java");
         File patch = new File("SpigotPlayer.json");
 
+        Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+
         PatchFile pf;
         try {
-            pf = PatchFile.SERIALIZER.deserialize(ConfigContext.INSTANCE, JSONCodec.fileCodec().loadFromFile(ConfigContext.INSTANCE, patch, StandardCharsets.UTF_8)).getOrThrow();
+            pf = PatchFile.load(gson.fromJson(new BufferedReader(new InputStreamReader(new FileInputStream(patch))), JsonArray.class));
         } catch (Exception ex) {
             Assertions.fail("An exception occurred while reading a file!", ex);
             return;
