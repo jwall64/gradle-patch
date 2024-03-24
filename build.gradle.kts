@@ -37,4 +37,13 @@ publishing {
     publications.create<MavenPublication>("maven") {
         from(components["java"])
     }
+
+    if (project.hasProperty("pubUrl")) {
+
+        val url: String = project.properties["pubUrl"] as String
+        repositories.maven(url) {
+            name = "pub"
+            credentials(PasswordCredentials::class.java)
+        }
+    }
 }
