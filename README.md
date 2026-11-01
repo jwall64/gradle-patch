@@ -13,7 +13,8 @@ by running `gradlew build` in its root. Then publish it to the local maven repos
 ```
 pluginManagement {
     repositories {
-}
+        mavenLocal()
+    }
 }
 ```
 Alternatively, you can reference it in your project directly by adding a reference to the cloned repository to your
@@ -27,7 +28,7 @@ pluginManagement {
 Then, add the plugin to your `build.gradle.kts`:
 ```
 plugins {
-    id("dev.jwall64.gradle-patch") version "0.1.0"
+    id("dev.jwall64.gradle-patch") version "0.3.0"
 }
 ```
 
@@ -89,7 +90,7 @@ entry. Each line rule may be formatted in a number of ways. See the example belo
     { "values": [ 6,7,10,3 ] }   // Lines 6, 7, 10, and 3 (in that order)
     { "min": 10, "max": 14 },   // All lines between 10 and 14 (inclusive),
     { "find": "Hello" },    // All lines with the which contain text "Hello"
-    { "find_regex": "^    public void (.*)\(\) {" }  // All lines which match the given regex pattern
+    { "find_regex": "^    public void (.*)\(\) {" }   // All lines which match the given regex pattern
 ]
 ```
 

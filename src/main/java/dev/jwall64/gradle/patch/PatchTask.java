@@ -3,16 +3,17 @@ package dev.jwall64.gradle.patch;
 import com.google.gson.*;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.file.SourceDirectorySet;
+import org.gradle.api.tasks.CacheableTask;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.*;
 
+@CacheableTask
 public class PatchTask extends DefaultTask {
 
     public SourceDirectorySet patches;
     public SourceDirectorySet sources;
     public File generatedSourceDir;
-
 
     @TaskAction
     public void patch() {

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.jwall64"
-version = "0.2.0"
+version = "0.3.0"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -15,10 +15,11 @@ repositories {
 }
 
 dependencies {
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation(libs.google.gson)
 
     testImplementation(platform(libs.junit.bom))
-    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit.jupiter)    
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.test {
@@ -40,7 +41,16 @@ publishing {
 
     if (project.hasProperty("pubUrl")) {
 
-        val url: String = project.properties["pubUrl"] as String
+        var url: String = project.properties["pubUrl"] as String
+        val repo = project.properties["pubRepo"]
+
+        if(repo != null) {
+            if(!url.endsWith("/")) {
+                url += "/"
+            }
+            url += repo
+        }
+
         repositories.maven(url) {
             name = "pub"
             credentials(PasswordCredentials::class.java)
